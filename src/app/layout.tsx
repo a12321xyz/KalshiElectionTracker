@@ -18,17 +18,17 @@ const ibmPlexMono = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Kalshi Ballot Tracker",
+  title: "Kalshi Election Tracker",
   description: "Track live Kalshi election markets with implied odds, momentum shifts, and volume leaders.",
   openGraph: {
-    title: "Kalshi Ballot Tracker",
+    title: "Kalshi Election Tracker",
     description: "Live election market tracker — implied odds, momentum shifts & volume leaders from Kalshi.",
     type: "website",
-    siteName: "Kalshi Ballot Tracker",
+    siteName: "Kalshi Election Tracker",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Kalshi Ballot Tracker",
+    title: "Kalshi Election Tracker",
     description: "Live election market tracker — implied odds, momentum shifts & volume leaders from Kalshi.",
   },
   icons: {
@@ -63,11 +63,11 @@ export default function RootLayout({
           color: "var(--ink-500)",
           fontFamily: "var(--font-display), sans-serif",
         }}>
-          <span>© {new Date().getFullYear()} Kalshi Ballot Tracker</span>
+          <span>© {new Date().getFullYear()} Kalshi Election Tracker</span>
           <nav style={{ display: "flex", gap: "1.2rem" }}>
             <a href="/about" style={{ color: "var(--ink-600)", textDecoration: "none" }}>About</a>
             <a href="https://kalshi.com" target="_blank" rel="noopener noreferrer" style={{ color: "var(--ink-600)", textDecoration: "none" }}>Data Source</a>
-            <a href="https://github.com" target="_blank" rel="noopener noreferrer" style={{ color: "var(--ink-600)", textDecoration: "none" }}>GitHub</a>
+            <a href="https://github.com/a12321xyz/KalshiElectionTracker" target="_blank" rel="noopener noreferrer" style={{ color: "var(--ink-600)", textDecoration: "none" }}>GitHub</a>
           </nav>
         </footer>
       </body>
