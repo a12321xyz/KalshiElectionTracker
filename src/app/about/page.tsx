@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import styles from "./about.module.css";
 
 export const metadata: Metadata = {
-  title: "About | Kalshi Ballot Tracker",
-  description: "What this dashboard tracks and how to use Kalshi Ballot Tracker.",
+  title: "About | Kalshi Election Tracker",
+  description: "What this dashboard tracks and how to use Kalshi Election Tracker.",
 };
 
 export default function AboutPage() {
@@ -11,7 +11,7 @@ export default function AboutPage() {
     <main className={styles.page}>
       <section className={styles.card}>
         <p className={styles.kicker}>About</p>
-        <h1 className={styles.title}>Kalshi Ballot Tracker</h1>
+        <h1 className={styles.title}>Kalshi Election Tracker</h1>
         <p className={styles.copy}>
           This app surfaces active election markets from Kalshi in one place so you can quickly scan implied odds, price moves,
           and top-volume races.
