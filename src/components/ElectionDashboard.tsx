@@ -27,6 +27,9 @@ const FILTER_OPTIONS: { value: FilterTag; label: string }[] = [
   { value: "election", label: "Election" },
 ];
 
+const FOCUSABLE_SELECTOR =
+  'a[href], button:not([disabled]), textarea:not([disabled]), input:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])';
+
 /* ── helpers ─────────────────────────── */
 
 function formatPercent(value: number): string {
@@ -165,6 +168,18 @@ function uniqueMarkets(snapshot: DashboardSnapshot | null): DashboardMarket[] {
   return Array.from(byTicker.values());
 }
 
+function isTextEntryTarget(target: EventTarget | null): boolean {
+  if (!(target instanceof HTMLElement)) {
+    return false;
+  }
+
+  if (target.isContentEditable) {
+    return true;
+  }
+
+  return target.tagName === "INPUT" || target.tagName === "TEXTAREA" || target.tagName === "SELECT";
+}
+
 type Toast = { id: number; message: string; type: "success" | "error" };
 
 /* ── Skeleton ────────────────────────── */
@@ -208,7 +223,24 @@ export function ElectionDashboard() {
   const snapshotRef = useRef(snapshot);
   snapshotRef.current = snapshot;
   const toastIdRef = useRef(0);
+  const dashboardRequestIdRef = useRef(0);
+  const statsFlashTimerRef = useRef<number | null>(null);
+  const toastTimerIdsRef = useRef<number[]>([]);
   const listRef = useRef<HTMLElement>(null);
+  const drawerRef = useRef<HTMLElement>(null);
+  const drawerCloseRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    return () => {
+      if (statsFlashTimerRef.current !== null) {
+        window.clearTimeout(statsFlashTimerRef.current);
+      }
+
+      for (const timerId of toastTimerIdsRef.current) {
+        window.clearTimeout(timerId);
+      }
+    };
+  }, []);
 
   /* ── Drawer swipe-to-close ─────────── */
   const swipeStartX = useRef(0);
@@ -230,15 +262,21 @@ export function ElectionDashboard() {
   const addToast = useCallback((message: string, type: "success" | "error") => {
     const id = ++toastIdRef.current;
     setToasts((prev) => [...prev, { id, message, type }]);
-    setTimeout(() => {
+
+    const timerId = window.setTimeout(() => {
       setToasts((prev) => prev.filter((t) => t.id !== id));
+      toastTimerIdsRef.current = toastTimerIdsRef.current.filter((activeTimerId) => activeTimerId !== timerId);
     }, TOAST_DURATION_MS);
+
+    toastTimerIdsRef.current.push(timerId);
   }, []);
 
   /* ── Data fetching ────────────────── */
 
   const loadDashboard = useCallback(
     async (silent = false) => {
+      const requestId = ++dashboardRequestIdRef.current;
+
       if (!silent) {
         setLoading(true);
         setError(null);
@@ -249,17 +287,33 @@ export function ElectionDashboard() {
         if (!response.ok) throw new Error(`Dashboard request failed (${response.status}).`);
 
         const nextSnapshot = (await response.json()) as DashboardSnapshot;
+
+        if (requestId !== dashboardRequestIdRef.current) {
+          return;
+        }
+
         setSnapshot(nextSnapshot);
         setLastRefresh(nextSnapshot.generatedAt);
         setRefreshIssue(null);
         setError(null);
 
         // Trigger stat value flash animation
+        if (statsFlashTimerRef.current !== null) {
+          window.clearTimeout(statsFlashTimerRef.current);
+        }
+
         setStatsFlash(true);
-        setTimeout(() => setStatsFlash(false), 450);
+        statsFlashTimerRef.current = window.setTimeout(() => {
+          setStatsFlash(false);
+          statsFlashTimerRef.current = null;
+        }, 450);
 
         if (silent) addToast("Data refreshed", "success");
       } catch (requestError) {
+        if (requestId !== dashboardRequestIdRef.current) {
+          return;
+        }
+
         const message = requestError instanceof Error ? requestError.message : "Could not load dashboard data.";
         if (silent && snapshotRef.current) {
           setRefreshIssue(message);
@@ -371,17 +425,79 @@ export function ElectionDashboard() {
     const handler = (e: KeyboardEvent) => {
       if (e.key === "Escape" && selectedTicker) {
         setSelectedTicker(null);
+        return;
       }
-      if (e.key === "ArrowLeft" && !selectedTicker && safePage > 0) {
+
+      if (e.defaultPrevented || e.metaKey || e.ctrlKey || e.altKey || isTextEntryTarget(e.target)) {
+        return;
+      }
+
+      if (selectedTicker) {
+        return;
+      }
+
+      if (e.key === "ArrowLeft" && safePage > 0) {
         setPage((p) => p - 1);
       }
-      if (e.key === "ArrowRight" && !selectedTicker && safePage < totalPages - 1) {
+
+      if (e.key === "ArrowRight" && safePage < totalPages - 1) {
         setPage((p) => p + 1);
       }
     };
     window.addEventListener("keydown", handler);
     return () => window.removeEventListener("keydown", handler);
   }, [selectedTicker, safePage, totalPages]);
+
+  useEffect(() => {
+    if (!selectedTicker) {
+      return;
+    }
+
+    const previouslyFocused = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+    const originalBodyOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    drawerCloseRef.current?.focus();
+
+    const trapFocus = (event: KeyboardEvent) => {
+      if (event.key !== "Tab") {
+        return;
+      }
+
+      const drawer = drawerRef.current;
+      if (!drawer) {
+        return;
+      }
+
+      const focusableElements = Array.from(drawer.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTOR)).filter(
+        (element) => element.tabIndex !== -1 && element.offsetParent !== null,
+      );
+
+      if (focusableElements.length === 0) {
+        event.preventDefault();
+        return;
+      }
+
+      const first = focusableElements[0];
+      const last = focusableElements[focusableElements.length - 1];
+      const activeElement = document.activeElement;
+
+      if (event.shiftKey && activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    };
+
+    document.addEventListener("keydown", trapFocus);
+
+    return () => {
+      document.removeEventListener("keydown", trapFocus);
+      document.body.style.overflow = originalBodyOverflow;
+      previouslyFocused?.focus();
+    };
+  }, [selectedTicker]);
 
   const stats = snapshot?.summary;
 
@@ -394,11 +510,9 @@ export function ElectionDashboard() {
 
       <header className={styles.hero}>
         <div className={styles.heroCopy}>
-          <p className={styles.kicker}>Live election markets from Kalshi</p>
-          <h1 className={styles.title}>Kalshi Ballot Tracker</h1>
-          <p className={styles.subtitle}>
-            Follow active election contracts with live implied odds, momentum shifts, and the races drawing the most volume.
-          </p>
+          <p className={styles.kicker}>Live Kalshi election markets</p>
+          <h1 className={styles.title}>Kalshi Election Tracker</h1>
+          <p className={styles.subtitle}>Live odds, momentum shifts, and top-volume races in one view.</p>
         </div>
 
         <div className={styles.heroMeta}>
@@ -448,7 +562,7 @@ export function ElectionDashboard() {
 
       <section className={styles.toolbar}>
         <label htmlFor="market-search" className={styles.searchWrap}>
-          <span className={styles.searchLabel}>Search election market</span>
+          <span className={styles.searchLabel}>Search markets</span>
           <input
             id="market-search"
             className={styles.searchInput}
@@ -675,7 +789,13 @@ export function ElectionDashboard() {
       ) : null}
 
       <aside
+        ref={drawerRef}
         className={`${styles.drawer} ${selectedTicker ? styles.drawerOpen : ""}`}
+        role="dialog"
+        aria-modal={selectedTicker ? "true" : undefined}
+        aria-labelledby="market-detail-title"
+        aria-hidden={!selectedTicker}
+        tabIndex={-1}
         onTouchStart={handleSwipeStart}
         onTouchMove={handleSwipeMove}
         onTouchEnd={handleSwipeEnd}
@@ -684,9 +804,11 @@ export function ElectionDashboard() {
         <div className={styles.drawerHeader}>
           <div>
             <p className={styles.drawerKicker}>{highlightedMarket?.eventTitle ?? detail?.eventTicker ?? "Election market"}</p>
-            <h3 className={styles.drawerTitle}>{highlightedMarket?.marketTitle ?? detail?.title ?? selectedTicker ?? "Market detail"}</h3>
+            <h3 id="market-detail-title" className={styles.drawerTitle}>
+              {highlightedMarket?.marketTitle ?? detail?.title ?? selectedTicker ?? "Market detail"}
+            </h3>
           </div>
-          <button className={styles.drawerClose} type="button" onClick={() => setSelectedTicker(null)}>
+          <button ref={drawerCloseRef} className={styles.drawerClose} type="button" onClick={() => setSelectedTicker(null)}>
             ✕ Close
           </button>
         </div>
