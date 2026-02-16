@@ -11,6 +11,8 @@ const NAV_ITEMS = [
   { href: "/about", label: "About" },
 ];
 
+const MOBILE_NAV_ID = "primary-mobile-nav";
+
 function getInitialDarkPreference(): boolean {
   if (typeof window === "undefined") {
     return false;
@@ -62,7 +64,7 @@ export function TopHeader() {
     <header className={styles.header}>
       <div className={styles.inner}>
         <Link href="/" className={styles.brand}>
-          Kalshi Ballot Tracker
+          Kalshi Election Tracker
         </Link>
 
         <nav className={styles.nav} aria-label="Primary">
@@ -111,6 +113,8 @@ export function TopHeader() {
             type="button"
             onClick={toggleMobile}
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
+            aria-expanded={mobileOpen}
+            aria-controls={MOBILE_NAV_ID}
           >
             <span />
             <span />
@@ -120,7 +124,7 @@ export function TopHeader() {
       </div>
 
       {mobileOpen ? (
-        <nav className={styles.mobileMenu} aria-label="Mobile navigation">
+        <nav id={MOBILE_NAV_ID} className={styles.mobileMenu} aria-label="Mobile navigation">
           {NAV_ITEMS.map((item) => {
             const isActive = item.href === "/" ? pathname === "/" : pathname.startsWith(item.href);
 
