@@ -1,0 +1,162 @@
+:root {
+  --primary: #1f7a4d;
+  --primary-rgb: 31, 122, 77;
+  --secondary: #4ca878;
+  --secondary-rgb: 76, 168, 120;
+  --growth: #16945e;
+  --growth-rgb: 22, 148, 94;
+  --caution: #d54444;
+  --caution-rgb: 213, 68, 68;
+
+  --background: #f2f8f4;
+  --foreground: #143828;
+  --card: rgba(255, 255, 255, 0.88);
+  --card-solid: #ffffff;
+  --border: rgba(163, 197, 178, 0.68);
+  --muted: #e5efe8;
+  --muted-foreground: #5b7466;
+
+  --ink-900: var(--foreground);
+  --ink-700: #3f6552;
+  --ink-500: #5c7768;
+  --ink-400: #4d6f5d;
+  --line-200: var(--border);
+
+  --gradient-primary: linear-gradient(135deg, #1f7a4d 0%, #4ca878 100%);
+  --shadow-soft: 0 12px 28px rgba(20, 52, 38, 0.09);
+  --shadow-elevated: 0 18px 40px rgba(20, 52, 38, 0.14);
+
+  --body-bg: linear-gradient(180deg, #f7fcf9 0%, #f2f8f4 46%, #eaf3ed 100%);
+  --body-glow-1: rgba(var(--primary-rgb), 0.17);
+  --body-glow-2: rgba(var(--secondary-rgb), 0.14);
+
+  --bar-low: #d54444;
+  --bar-mid: #e9a820;
+  --bar-high: #1f7a4d;
+
+  --toast-bg: var(--card-solid);
+  --toast-border: var(--border);
+
+  --skeleton-base: #e0eae3;
+  --skeleton-shine: #f0f7f2;
+
+  --drawer-bg: #f7fbf8;
+  --header-bg: rgba(247, 252, 249, 0.88);
+}
+
+[data-theme="dark"] {
+  --primary: #3ddb86;
+  --primary-rgb: 61, 219, 134;
+  --secondary: #2aae6a;
+  --secondary-rgb: 42, 174, 106;
+  --growth: #3ddb86;
+  --growth-rgb: 61, 219, 134;
+  --caution: #f06060;
+  --caution-rgb: 240, 96, 96;
+
+  --background: #0e1a14;
+  --foreground: #dceee4;
+  --card: rgba(22, 40, 30, 0.82);
+  --card-solid: #162a1f;
+  --border: rgba(61, 100, 78, 0.4);
+  --muted: #1a2f22;
+  --muted-foreground: #8aaa98;
+
+  --ink-900: var(--foreground);
+  --ink-700: #a3c4b2;
+  --ink-500: #7a9f8b;
+  --ink-400: #6b907c;
+  --line-200: var(--border);
+
+  --gradient-primary: linear-gradient(135deg, #1d8a52 0%, #3ddb86 100%);
+  --shadow-soft: 0 12px 28px rgba(0, 0, 0, 0.35);
+  --shadow-elevated: 0 18px 40px rgba(0, 0, 0, 0.5);
+
+  --body-bg: linear-gradient(180deg, #0a140f 0%, #0e1a14 46%, #121f18 100%);
+  --body-glow-1: rgba(var(--primary-rgb), 0.08);
+  --body-glow-2: rgba(var(--secondary-rgb), 0.06);
+
+  --bar-low: #f06060;
+  --bar-mid: #e9a820;
+  --bar-high: #3ddb86;
+
+  --toast-bg: #1a2f22;
+  --toast-border: rgba(61, 100, 78, 0.5);
+
+  --skeleton-base: #1a2f22;
+  --skeleton-shine: #243d2e;
+
+  --drawer-bg: #111e16;
+  --header-bg: rgba(14, 26, 20, 0.88);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  width: 100%;
+  min-height: 100%;
+}
+
+body {
+  background:
+    radial-gradient(circle at 10% 8%, var(--body-glow-1) 0, transparent 36%),
+    radial-gradient(circle at 86% 92%, var(--body-glow-2) 0, transparent 40%),
+    var(--body-bg);
+  color: var(--foreground);
+  font-family: var(--font-display), "Avenir Next", "Segoe UI", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background 300ms ease, color 300ms ease;
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+::selection {
+  background: rgba(var(--primary-rgb), 0.22);
+}
+
+::-webkit-scrollbar {
+  width: 9px;
+  height: 9px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--muted);
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 999px;
+  background: rgba(var(--primary-rgb), 0.45);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(var(--secondary-rgb), 0.7);
+}
+
+/* Visually hidden but accessible */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}

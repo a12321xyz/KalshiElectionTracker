@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://kalshi-ballot-tracker.vercel.app/sitemap.xml

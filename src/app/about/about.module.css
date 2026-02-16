@@ -1,0 +1,133 @@
+.page {
+  min-height: calc(100vh - 3.4rem);
+  padding: 1.5rem clamp(1rem, 3vw, 2.5rem) 3rem;
+  display: grid;
+  gap: 1rem;
+}
+
+.card {
+  width: 100%;
+  border: 1px solid var(--line-200);
+  border-radius: 1rem;
+  background: var(--card);
+  box-shadow:
+    var(--shadow-soft),
+    inset 0 1px 0 rgba(255, 255, 255, 0.58);
+  padding: clamp(1rem, 3vw, 1.6rem);
+  backdrop-filter: blur(10px);
+}
+
+.kicker {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  border: 1px solid rgba(var(--primary-rgb), 0.45);
+  color: var(--primary);
+  background: rgba(var(--primary-rgb), 0.11);
+  letter-spacing: 0.06em;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 0.3rem 0.7rem;
+}
+
+.title {
+  margin-top: 0.8rem;
+  color: var(--ink-900);
+  line-height: 1.12;
+  font-size: clamp(1.6rem, 3.8vw, 2.5rem);
+  letter-spacing: -0.02em;
+}
+
+.copy {
+  margin-top: 0.8rem;
+  color: var(--ink-700);
+  line-height: 1.6;
+  max-width: 46rem;
+}
+
+.sectionTitle {
+  color: var(--ink-900);
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin-bottom: 0.6rem;
+}
+
+.featureList,
+.techList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 0.5rem;
+}
+
+.featureList li,
+.techList li {
+  color: var(--ink-700);
+  line-height: 1.55;
+  padding-left: 1.2rem;
+  position: relative;
+}
+
+.featureList li::before,
+.techList li::before {
+  content: "";
+  position: absolute;
+  left: 0.15rem;
+  top: 0.55rem;
+  width: 0.38rem;
+  height: 0.38rem;
+  border-radius: 50%;
+  background: var(--primary);
+}
+
+.faqItem {
+  border-bottom: 1px solid var(--line-200);
+  padding: 0.6rem 0;
+}
+
+.faqItem:last-child {
+  border-bottom: none;
+}
+
+.faqQuestion {
+  color: var(--ink-900);
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0.3rem 0;
+  list-style: none;
+}
+
+.faqQuestion::-webkit-details-marker {
+  display: none;
+}
+
+.faqQuestion::before {
+  content: "▸ ";
+  color: var(--primary);
+  transition: transform 200ms ease;
+  display: inline-block;
+}
+
+.faqItem[open] .faqQuestion::before {
+  content: "▾ ";
+}
+
+.faqAnswer {
+  color: var(--ink-600);
+  line-height: 1.6;
+  margin-top: 0.3rem;
+  padding-left: 1rem;
+  max-width: 46rem;
+}
+
+.link {
+  color: var(--primary);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.link:hover {
+  text-decoration-thickness: 2px;
+}
