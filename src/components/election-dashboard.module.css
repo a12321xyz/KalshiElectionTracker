@@ -1,7 +1,7 @@
 .shell {
   position: relative;
   min-height: 100vh;
-  padding: 2.25rem clamp(1rem, 3vw, 2.5rem) 4rem;
+  padding: 1.1rem clamp(1rem, 3vw, 2.5rem) 3rem;
   color: var(--ink-900);
 }
 
@@ -35,23 +35,23 @@
 
 .hero {
   display: flex;
-  gap: 1.5rem;
+  gap: 0.9rem;
   align-items: flex-end;
   justify-content: space-between;
   flex-wrap: wrap;
   border: 1px solid var(--line-200);
-  border-radius: 1.15rem;
+  border-radius: 1rem;
   background: linear-gradient(135deg,
       rgba(var(--primary-rgb), 0.12) 0%,
       rgba(var(--secondary-rgb), 0.12) 58%,
       rgba(255, 255, 255, 0.05) 100%);
   box-shadow: var(--shadow-soft);
-  padding: 1rem;
+  padding: 0.78rem 0.9rem;
   backdrop-filter: blur(8px);
 }
 
 .heroCopy {
-  max-width: 46rem;
+  max-width: 38rem;
 }
 
 .kicker {
@@ -61,32 +61,32 @@
   border: 1px solid rgba(var(--primary-rgb), 0.45);
   color: var(--primary);
   background: rgba(var(--primary-rgb), 0.12);
-  letter-spacing: 0.08em;
-  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  font-size: 0.66rem;
   font-weight: 700;
   text-transform: uppercase;
-  padding: 0.3rem 0.72rem;
+  padding: 0.24rem 0.58rem;
 }
 
 .title {
-  margin-top: 0.85rem;
-  line-height: 1.1;
-  font-size: clamp(1.8rem, 4.2vw, 3.3rem);
+  margin-top: 0.42rem;
+  line-height: 1.06;
+  font-size: clamp(1.45rem, 3vw, 2.2rem);
   letter-spacing: -0.03em;
   color: var(--ink-900);
 }
 
 .subtitle {
-  margin-top: 0.85rem;
-  max-width: 42rem;
+  margin-top: 0.38rem;
+  max-width: 32rem;
   color: var(--ink-700);
-  font-size: clamp(0.95rem, 1.4vw, 1.05rem);
-  line-height: 1.55;
+  font-size: clamp(0.86rem, 1.1vw, 0.95rem);
+  line-height: 1.38;
 }
 
 .heroMeta {
   display: grid;
-  gap: 0.6rem;
+  gap: 0.45rem;
   justify-items: end;
 }
 
@@ -98,9 +98,9 @@
   border: 1px solid rgba(var(--primary-rgb), 0.4);
   background: rgba(var(--primary-rgb), 0.1);
   color: var(--primary);
-  font-size: 0.82rem;
+  font-size: 0.75rem;
   font-weight: 600;
-  padding: 0.34rem 0.8rem;
+  padding: 0.3rem 0.7rem;
 }
 
 .liveDot {
@@ -113,7 +113,7 @@
 
 .timestamp {
   color: var(--ink-400);
-  font-size: 0.84rem;
+  font-size: 0.78rem;
 }
 
 .refreshButton {
@@ -121,9 +121,9 @@
   border-radius: 0.75rem;
   background: var(--gradient-primary);
   color: #f4ffff;
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   font-weight: 600;
-  padding: 0.58rem 0.95rem;
+  padding: 0.46rem 0.8rem;
   cursor: pointer;
   transition: transform 160ms ease, opacity 160ms ease;
 }
@@ -142,10 +142,10 @@
 
 .alertError,
 .alertWarn {
-  margin-top: 1rem;
+  margin-top: 0.75rem;
   border-radius: 0.75rem;
-  padding: 0.75rem 0.95rem;
-  font-size: 0.9rem;
+  padding: 0.62rem 0.8rem;
+  font-size: 0.84rem;
 }
 
 .alertError {
@@ -163,10 +163,10 @@
 /* ── Stats Grid ───────────────────────── */
 
 .statsGrid {
-  margin-top: 1.3rem;
+  margin-top: 0.85rem;
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 0.8rem;
+  gap: 0.6rem;
 }
 
 .statCard {
@@ -176,14 +176,14 @@
   box-shadow:
     var(--shadow-soft),
     inset 0 1px 0 rgba(255, 255, 255, 0.12);
-  border-radius: 1rem;
-  padding: 0.95rem 1rem;
+  border-radius: 0.9rem;
+  padding: 0.72rem 0.82rem;
   animation: riseIn 420ms ease both;
   transition: background 300ms ease, border-color 300ms ease;
 }
 
 .statLabel {
-  font-size: 0.78rem;
+  font-size: 0.71rem;
   letter-spacing: 0.07em;
   text-transform: uppercase;
   color: var(--ink-500);
@@ -191,8 +191,8 @@
 }
 
 .statValue {
-  margin-top: 0.5rem;
-  font-size: clamp(1.2rem, 2vw, 1.8rem);
+  margin-top: 0.34rem;
+  font-size: clamp(1.05rem, 1.7vw, 1.45rem);
   letter-spacing: -0.02em;
   color: var(--ink-900);
   font-weight: 700;
@@ -204,15 +204,15 @@
 }
 
 .statHint {
-  margin-top: 0.3rem;
+  margin-top: 0.18rem;
   color: var(--ink-500);
-  font-size: 0.82rem;
+  font-size: 0.74rem;
 }
 
 /* ── Toolbar ──────────────────────────── */
 
 .toolbar {
-  margin-top: 1rem;
+  margin-top: 0.72rem;
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
@@ -223,8 +223,8 @@
   background: var(--card);
   backdrop-filter: blur(12px);
   border: 1px solid var(--line-200);
-  border-radius: 1rem;
-  padding: 0.75rem 0.9rem;
+  border-radius: 0.9rem;
+  padding: 0.62rem 0.75rem;
   box-shadow: var(--shadow-soft);
   transition: background 300ms ease, border-color 200ms ease;
 }
@@ -241,7 +241,7 @@
 
 .searchLabel {
   color: var(--ink-400);
-  font-size: 0.79rem;
+  font-size: 0.71rem;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.06em;
@@ -251,7 +251,7 @@
   border: 1px solid var(--line-200);
   background: var(--card);
   border-radius: 0.8rem;
-  padding: 0.7rem 0.9rem;
+  padding: 0.56rem 0.72rem;
   color: var(--ink-900);
   transition: border-color 160ms ease, background 300ms ease;
 }
@@ -264,13 +264,13 @@
 .toolbarInfo {
   align-self: end;
   color: var(--ink-400);
-  font-size: 0.86rem;
+  font-size: 0.79rem;
 }
 
 /* ── Sort & Filter ────────────────────── */
 
 .sortFilterRow {
-  margin-top: 0.55rem;
+  margin-top: 0.34rem;
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
@@ -280,9 +280,9 @@
 .sortSelect {
   border: 1px solid var(--line-200);
   background: var(--card);
-  border-radius: 0.7rem;
-  padding: 0.4rem 0.65rem;
-  font-size: 0.8rem;
+  border-radius: 0.62rem;
+  padding: 0.34rem 0.55rem;
+  font-size: 0.76rem;
   color: var(--ink-900);
   cursor: pointer;
   font-weight: 600;
@@ -304,8 +304,8 @@
   border: 1px solid var(--line-200);
   background: var(--card);
   border-radius: 999px;
-  padding: 0.3rem 0.65rem;
-  font-size: 0.74rem;
+  padding: 0.24rem 0.55rem;
+  font-size: 0.71rem;
   font-weight: 600;
   color: var(--ink-500);
   cursor: pointer;
@@ -326,7 +326,7 @@
 /* ── Content Grid ─────────────────────── */
 
 .contentGrid {
-  margin-top: 1rem;
+  margin-top: 0.72rem;
   display: grid;
   grid-template-columns: minmax(0, 1.8fr) minmax(0, 1fr);
   gap: 0.9rem;
@@ -1162,7 +1162,7 @@
 @media (max-width: 760px) {
   .shell {
     padding-inline: 0.85rem;
-    padding-top: 1.2rem;
+    padding-top: 0.78rem;
   }
 
   .heroMeta {
@@ -1182,7 +1182,7 @@
   }
 
   .toolbar {
-    top: 3rem;
+    top: 2.8rem;
   }
 
   .sortFilterRow {
