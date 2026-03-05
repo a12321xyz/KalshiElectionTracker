@@ -257,7 +257,7 @@ export function ElectionDashboard() {
   }, []);
   const handleSwipeEnd = useCallback(() => {
     const delta = swipeCurrentX.current - swipeStartX.current;
-    if (delta > 80) setSelectedTicker(null); // swiped right > 80px
+    if (delta > SWIPE_CLOSE_THRESHOLD) setSelectedTicker(null);
   }, []);
 
   /* ── Toast helper ─────────────────── */
