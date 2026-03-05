@@ -522,7 +522,7 @@ export function ElectionDashboard() {
         <div className={styles.heroMeta}>
           <div className={styles.liveBadge}>
             <span className={styles.liveDot} aria-hidden="true" />
-            <span>Updates every 45 seconds</span>
+            <span>{LIVE_UPDATES_LABEL}</span>
           </div>
           <p className={styles.timestamp}>Last updated: {lastRefresh ? relativeTime(lastRefresh) : "--"}</p>
           <button className={styles.refreshButton} type="button" disabled={loading} onClick={() => void loadDashboard(false)}>
