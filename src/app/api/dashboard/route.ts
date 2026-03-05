@@ -26,7 +26,7 @@ export async function GET(request: Request) {
 
     return NextResponse.json(snapshot, {
       headers: {
-        "Cache-Control": "s-maxage=20, stale-while-revalidate=40",
+        "Cache-Control": DASHBOARD_CACHE_CONTROL,
       },
     });
   } catch (error) {
