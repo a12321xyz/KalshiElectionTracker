@@ -136,3 +136,6 @@ This file tracks small, low-risk maintenance updates so behavior-focused work ca
 
 ## In flight dedupe
 - Documented shared in flight snapshot promises to prevent duplicate work.
+
+## Cache reset on failure
+- Noted that snapshot cache is cleared when a cold start fetch throws.
