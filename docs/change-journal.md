@@ -130,3 +130,6 @@ This file tracks small, low-risk maintenance updates so behavior-focused work ca
 
 ## Cold start snapshot flow
 - Captured the behavior when snapshot cache is empty at startup.
+
+## Background refresh fallback
+- Added notes for fallback behavior when background refresh fails.
