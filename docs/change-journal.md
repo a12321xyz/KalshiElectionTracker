@@ -124,3 +124,6 @@ This file tracks small, low-risk maintenance updates so behavior-focused work ca
 
 ## Query normalization
 - Added notes on serializing query values before request dispatch.
+
+## Path normalization
+- Documented forced leading slash normalization for API paths.
