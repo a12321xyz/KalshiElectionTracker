@@ -10,6 +10,7 @@ const TOAST_DURATION_MS = 3_200;
 const DASHBOARD_ENDPOINT = "/api/dashboard";
 const MARKET_ENDPOINT_PREFIX = "/api/market/";
 const SWIPE_CLOSE_THRESHOLD = 80;
+const LIVE_UPDATES_LABEL = "Updates every 45 seconds";
 
 type SortKey = "volume" | "probability" | "move" | "close";
 type FilterTag = "all" | "senate" | "governor" | "president" | "house" | "election";
