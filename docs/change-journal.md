@@ -118,3 +118,6 @@ This file tracks small, low-risk maintenance updates so behavior-focused work ca
 
 ## Open events pagination
 - Documented the two page fetch path for open events queries.
+
+## Second page fetch condition
+- Recorded that page two only runs when a cursor is present.
