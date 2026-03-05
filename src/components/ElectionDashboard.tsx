@@ -7,6 +7,7 @@ import styles from "./election-dashboard.module.css";
 const REFRESH_INTERVAL_MS = 45_000;
 const PAGE_SIZE = 25;
 const TOAST_DURATION_MS = 3_200;
+const DASHBOARD_ENDPOINT = "/api/dashboard";
 
 type SortKey = "volume" | "probability" | "move" | "close";
 type FilterTag = "all" | "senate" | "governor" | "president" | "house" | "election";
