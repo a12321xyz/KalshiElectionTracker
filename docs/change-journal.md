@@ -4,3 +4,6 @@ This file tracks small, low-risk maintenance updates so behavior-focused work ca
 
 ## Journal kickoff
 - Added a dedicated journal to keep minor follow-up edits organized.
+
+## Dashboard cache headers
+- Recorded the current Cache Control profile used by the dashboard endpoint.
