@@ -311,7 +311,7 @@ export function ElectionDashboard() {
         statsFlashTimerRef.current = window.setTimeout(() => {
           setStatsFlash(false);
           statsFlashTimerRef.current = null;
-        }, 450);
+        }, STATS_FLASH_MS);
 
         if (silent) addToast("Data refreshed", "success");
       } catch (requestError) {
