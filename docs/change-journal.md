@@ -142,3 +142,6 @@ This file tracks small, low-risk maintenance updates so behavior-focused work ca
 
 ## Upstream no store setting
 - Captured that upstream calls bypass fetch level caching.
+
+## Accept header default
+- Documented JSON accept header defaults for upstream requests.
