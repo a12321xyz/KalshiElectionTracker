@@ -115,3 +115,6 @@ This file tracks small, low-risk maintenance updates so behavior-focused work ca
 
 ## Ticker dedupe
 - Added notes on deduplicating tickers before market refresh calls.
+
+## Open events pagination
+- Documented the two page fetch path for open events queries.
