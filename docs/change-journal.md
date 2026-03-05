@@ -22,3 +22,6 @@ This file tracks small, low-risk maintenance updates so behavior-focused work ca
 
 ## Snapshot TTL behavior
 - Documented the dashboard snapshot cache time to live value.
+
+## Stale while revalidate flow
+- Explained when stale data is served during background refresh.
