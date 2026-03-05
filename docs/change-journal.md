@@ -25,3 +25,6 @@ This file tracks small, low-risk maintenance updates so behavior-focused work ca
 
 ## Stale while revalidate flow
 - Explained when stale data is served during background refresh.
+
+## Candidate market filtering
+- Added context on strict election filtering before market ranking.
