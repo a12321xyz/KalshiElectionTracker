@@ -11,6 +11,7 @@ const DASHBOARD_ENDPOINT = "/api/dashboard";
 const MARKET_ENDPOINT_PREFIX = "/api/market/";
 const SWIPE_CLOSE_THRESHOLD = 80;
 const LIVE_UPDATES_LABEL = "Updates every 45 seconds";
+const STATS_FLASH_MS = 450;
 
 type SortKey = "volume" | "probability" | "move" | "close";
 type FilterTag = "all" | "senate" | "governor" | "president" | "house" | "election";
