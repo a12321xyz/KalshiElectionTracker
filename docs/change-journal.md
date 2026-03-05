@@ -85,3 +85,6 @@ This file tracks small, low-risk maintenance updates so behavior-focused work ca
 
 ## Market request ceiling
 - Documented the per minute request cap for market detail calls.
+
+## Retry After header
+- Captured how retry wait time is surfaced on rate limited responses.
