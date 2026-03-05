@@ -67,3 +67,6 @@ This file tracks small, low-risk maintenance updates so behavior-focused work ca
 
 ## Fallback IP behavior
 - Documented unknown fallback behavior when no valid header is present.
+
+## Bucket capacity safeguard
+- Added notes on oldest bucket eviction at the map capacity limit.
