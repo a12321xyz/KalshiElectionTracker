@@ -76,3 +76,6 @@ This file tracks small, low-risk maintenance updates so behavior-focused work ca
 
 ## API runtime selection
 - Documented why both API routes stay on the node runtime.
+
+## Ticker validation rule
+- Added regex constraint notes for market detail ticker input.
