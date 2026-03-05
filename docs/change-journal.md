@@ -19,3 +19,6 @@ This file tracks small, low-risk maintenance updates so behavior-focused work ca
 
 ## Transient status handling
 - Captured which upstream status codes are treated as retry eligible.
+
+## Snapshot TTL behavior
+- Documented the dashboard snapshot cache time to live value.
