@@ -91,3 +91,6 @@ This file tracks small, low-risk maintenance updates so behavior-focused work ca
 
 ## Empty snapshot shape
 - Added notes on fields returned when no election markets are found.
+
+## Event summary truncation
+- Documented the current event summary cap used in dashboard payloads.
