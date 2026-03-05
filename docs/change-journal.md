@@ -106,3 +106,6 @@ This file tracks small, low-risk maintenance updates so behavior-focused work ca
 
 ## Average probability metric
 - Recorded the formula used for dashboard average probability.
+
+## Positive mover counting
+- Noted that positive mover count tracks markets above zero move points.
