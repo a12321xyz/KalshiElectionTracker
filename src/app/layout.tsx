@@ -20,7 +20,7 @@ const ibmPlexMono = IBM_Plex_Mono({
 const SITE_NAME = "Kalshi Election Tracker";
 
 export const metadata: Metadata = {
-  title: "Kalshi Election Tracker",
+  title: SITE_NAME,
   description: "Track live Kalshi election markets with implied odds, momentum shifts, and volume leaders.",
   openGraph: {
     title: "Kalshi Election Tracker",
