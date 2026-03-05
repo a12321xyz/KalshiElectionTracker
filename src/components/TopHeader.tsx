@@ -49,7 +49,7 @@ export function TopHeader() {
     setDark((prev) => {
       const next = !prev;
       try {
-        localStorage.setItem("theme", next ? "dark" : "light");
+        localStorage.setItem(THEME_STORAGE_KEY, next ? "dark" : "light");
       } catch {
         // localStorage unavailable
       }
