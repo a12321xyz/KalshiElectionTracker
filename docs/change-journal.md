@@ -52,3 +52,6 @@ This file tracks small, low-risk maintenance updates so behavior-focused work ca
 
 ## Market detail field mapping
 - Added a concise mapping note for market detail response fields.
+
+## Rate limit window size
+- Documented the one minute sliding window used by API rate limiting.
