@@ -139,3 +139,6 @@ This file tracks small, low-risk maintenance updates so behavior-focused work ca
 
 ## Cache reset on failure
 - Noted that snapshot cache is cleared when a cold start fetch throws.
+
+## Upstream no store setting
+- Captured that upstream calls bypass fetch level caching.
