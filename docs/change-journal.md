@@ -109,3 +109,6 @@ This file tracks small, low-risk maintenance updates so behavior-focused work ca
 
 ## Positive mover counting
 - Noted that positive mover count tracks markets above zero move points.
+
+## Market chunk sizing
+- Documented why ticker requests are chunked before batch fetches.
