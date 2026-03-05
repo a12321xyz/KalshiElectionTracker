@@ -88,3 +88,6 @@ This file tracks small, low-risk maintenance updates so behavior-focused work ca
 
 ## Retry After header
 - Captured how retry wait time is surfaced on rate limited responses.
+
+## Empty snapshot shape
+- Added notes on fields returned when no election markets are found.
