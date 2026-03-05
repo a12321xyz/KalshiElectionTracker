@@ -63,6 +63,7 @@ const SNAPSHOT_TTL_MS = 25_000;
 const REQUEST_TIMEOUT_MS = 8_000;
 const OPEN_MARKET_STATUS = "open";
 const DEFAULT_IMPLIED_PROBABILITY = 50;
+const TOP_EVENTS_LIMIT = 10;
 
 let snapshotCache: { value: DashboardSnapshot; expiresAt: number } | null = null;
 let snapshotInFlight: Promise<DashboardSnapshot> | null = null;
