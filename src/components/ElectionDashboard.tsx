@@ -284,7 +284,7 @@ export function ElectionDashboard() {
       }
 
       try {
-        const response = await fetch("/api/dashboard", { cache: "no-store" });
+        const response = await fetch(DASHBOARD_ENDPOINT, { cache: "no-store" });
         if (!response.ok) throw new Error(`Dashboard request failed (${response.status}).`);
 
         const nextSnapshot = (await response.json()) as DashboardSnapshot;
