@@ -112,3 +112,6 @@ This file tracks small, low-risk maintenance updates so behavior-focused work ca
 
 ## Market chunk sizing
 - Documented why ticker requests are chunked before batch fetches.
+
+## Ticker dedupe
+- Added notes on deduplicating tickers before market refresh calls.
