@@ -40,3 +40,6 @@ This file tracks small, low-risk maintenance updates so behavior-focused work ca
 
 ## Move point calculation
 - Captured how current probability is compared to previous pricing.
+
+## Event grouping strategy
+- Added notes on grouping markets into event level summaries.
