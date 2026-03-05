@@ -13,3 +13,6 @@ This file tracks small, low-risk maintenance updates so behavior-focused work ca
 
 ## Request timeout baseline
 - Documented the current upstream timeout guard used for Kalshi requests.
+
+## Retry backoff defaults
+- Added notes for retry delay growth across transient failures.
