@@ -70,3 +70,6 @@ This file tracks small, low-risk maintenance updates so behavior-focused work ca
 
 ## Bucket capacity safeguard
 - Added notes on oldest bucket eviction at the map capacity limit.
+
+## Cleanup interval
+- Recorded the periodic cleanup cadence for limiter maintenance.
