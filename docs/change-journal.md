@@ -34,3 +34,6 @@ This file tracks small, low-risk maintenance updates so behavior-focused work ca
 
 ## Exclusion keyword intent
 - Clarified why speech and interview phrasing is excluded.
+
+## Probability fallback order
+- Logged the field precedence used to compute implied probability.
