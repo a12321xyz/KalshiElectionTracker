@@ -133,3 +133,6 @@ This file tracks small, low-risk maintenance updates so behavior-focused work ca
 
 ## Background refresh fallback
 - Added notes for fallback behavior when background refresh fails.
+
+## In flight dedupe
+- Documented shared in flight snapshot promises to prevent duplicate work.
