@@ -145,3 +145,6 @@ This file tracks small, low-risk maintenance updates so behavior-focused work ca
 
 ## Accept header default
 - Documented JSON accept header defaults for upstream requests.
+
+## API error message wording
+- Added rationale for concise user facing API error messages.
