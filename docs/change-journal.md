@@ -37,3 +37,6 @@ This file tracks small, low-risk maintenance updates so behavior-focused work ca
 
 ## Probability fallback order
 - Logged the field precedence used to compute implied probability.
+
+## Move point calculation
+- Captured how current probability is compared to previous pricing.
