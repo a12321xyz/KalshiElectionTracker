@@ -247,7 +247,7 @@ async function requestKalshi<T>(path: string, query?: Record<string, string | nu
 async function fetchOpenEventsWithNestedMarkets(): Promise<RawEvent[]> {
   // Fetch page 1
   const page1 = await requestKalshi<EventsResponse>("/events", {
-    status: "open",
+    status: OPEN_MARKET_STATUS,
     with_nested_markets: true,
     limit: 200,
   });
