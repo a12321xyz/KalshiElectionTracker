@@ -286,7 +286,7 @@ async function fetchMarketsByTickers(tickers: string[]): Promise<Map<string, Raw
   const responses = await Promise.all(
     tickerChunks.map((tickerChunk) =>
       requestKalshi<MarketsResponse>("/markets", {
-        status: "open",
+        status: OPEN_MARKET_STATUS,
         mve_filter: "exclude",
         limit: 1000,
         tickers: tickerChunk.join(","),
