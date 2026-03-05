@@ -23,7 +23,7 @@ export const metadata: Metadata = {
   title: SITE_NAME,
   description: "Track live Kalshi election markets with implied odds, momentum shifts, and volume leaders.",
   openGraph: {
-    title: "Kalshi Election Tracker",
+    title: SITE_NAME,
     description: "Live election market tracker — implied odds, momentum shifts & volume leaders from Kalshi.",
     type: "website",
     siteName: "Kalshi Election Tracker",
