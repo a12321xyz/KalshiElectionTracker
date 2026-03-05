@@ -16,3 +16,6 @@ This file tracks small, low-risk maintenance updates so behavior-focused work ca
 
 ## Retry backoff defaults
 - Added notes for retry delay growth across transient failures.
+
+## Transient status handling
+- Captured which upstream status codes are treated as retry eligible.
