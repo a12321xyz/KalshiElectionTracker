@@ -257,7 +257,7 @@ async function fetchOpenEventsWithNestedMarkets(): Promise<RawEvent[]> {
   // If there's a cursor, fetch page 2 in parallel with any downstream processing
   if (page1.cursor) {
     const page2 = await requestKalshi<EventsResponse>("/events", {
-      status: "open",
+      status: OPEN_MARKET_STATUS,
       with_nested_markets: true,
       limit: 200,
       cursor: page1.cursor,
