@@ -10,3 +10,6 @@ This file tracks small, low-risk maintenance updates so behavior-focused work ca
 
 ## Market cache headers
 - Noted that market detail responses mirror the dashboard cache behavior.
+
+## Request timeout baseline
+- Documented the current upstream timeout guard used for Kalshi requests.
