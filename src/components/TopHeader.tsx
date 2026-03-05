@@ -74,7 +74,7 @@ export function TopHeader() {
 
         <nav className={styles.nav} aria-label="Primary">
           {NAV_ITEMS.map((item) => {
-            const isActive = item.href === "/" ? pathname === "/" : pathname.startsWith(item.href);
+            const isActive = isNavItemActive(pathname, item.href);
 
             return (
               <Link
