@@ -103,3 +103,6 @@ This file tracks small, low-risk maintenance updates so behavior-focused work ca
 
 ## Volume aggregation
 - Documented how total volume is aggregated across merged markets.
+
+## Average probability metric
+- Recorded the formula used for dashboard average probability.
