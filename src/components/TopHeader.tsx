@@ -65,6 +65,10 @@ export function TopHeader() {
     setMobileMenuPath((prev) => (prev === pathname ? null : pathname));
   }, [pathname]);
 
+  useEffect(() => {
+    setMobileMenuPath(null);
+  }, [pathname]);
+
   return (
     <header className={styles.header}>
       <div className={styles.inner}>
