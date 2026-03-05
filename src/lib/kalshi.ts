@@ -61,6 +61,7 @@ const MAX_REQUEST_RETRIES = 2;
 const RETRY_BASE_DELAY_MS = 250;
 const SNAPSHOT_TTL_MS = 25_000;
 const REQUEST_TIMEOUT_MS = 8_000;
+const OPEN_MARKET_STATUS = "open";
 
 let snapshotCache: { value: DashboardSnapshot; expiresAt: number } | null = null;
 let snapshotInFlight: Promise<DashboardSnapshot> | null = null;
