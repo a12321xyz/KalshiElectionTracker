@@ -121,3 +121,6 @@ This file tracks small, low-risk maintenance updates so behavior-focused work ca
 
 ## Second page fetch condition
 - Recorded that page two only runs when a cursor is present.
+
+## Query normalization
+- Added notes on serializing query values before request dispatch.
