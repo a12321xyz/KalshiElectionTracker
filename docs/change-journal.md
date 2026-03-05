@@ -31,3 +31,6 @@ This file tracks small, low-risk maintenance updates so behavior-focused work ca
 
 ## Election keyword patterns
 - Documented the positive keyword patterns used by market filtering.
+
+## Exclusion keyword intent
+- Clarified why speech and interview phrasing is excluded.
