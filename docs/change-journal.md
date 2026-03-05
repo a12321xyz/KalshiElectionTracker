@@ -46,3 +46,6 @@ This file tracks small, low-risk maintenance updates so behavior-focused work ca
 
 ## Top market ranking rule
 - Documented the volume first ranking method for featured markets.
+
+## Mover selection threshold
+- Recorded the threshold that promotes markets into mover lists.
