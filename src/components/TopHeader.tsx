@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 import styles from "./top-header.module.css";
 
-const NAV_ITEMS = [
+const NAV_ITEMS: ReadonlyArray<{ href: string; label: string }> = [
   { href: "/", label: "Markets" },
   { href: "/about", label: "About" },
 ];
