@@ -76,7 +76,7 @@ function pruneBuckets(now: number): void {
 // Cleanup stale entries every 5 minutes
 setInterval(() => {
     pruneBuckets(Date.now());
-}, 5 * 60_000).unref?.();
+}, CLEANUP_INTERVAL_MS).unref?.();
 
 /**
  * Check whether a request from `key` (typically an IP) should be allowed.
