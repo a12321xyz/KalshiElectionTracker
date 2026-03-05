@@ -55,3 +55,6 @@ This file tracks small, low-risk maintenance updates so behavior-focused work ca
 
 ## Rate limit window size
 - Documented the one minute sliding window used by API rate limiting.
+
+## Rate limit bucket pruning
+- Captured stale bucket pruning behavior in the limiter map.
