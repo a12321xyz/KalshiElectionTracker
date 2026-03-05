@@ -28,3 +28,6 @@ This file tracks small, low-risk maintenance updates so behavior-focused work ca
 
 ## Candidate market filtering
 - Added context on strict election filtering before market ranking.
+
+## Election keyword patterns
+- Documented the positive keyword patterns used by market filtering.
