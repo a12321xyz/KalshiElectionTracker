@@ -79,3 +79,6 @@ This file tracks small, low-risk maintenance updates so behavior-focused work ca
 
 ## Ticker validation rule
 - Added regex constraint notes for market detail ticker input.
+
+## Dashboard request ceiling
+- Documented the current per minute request cap for dashboard calls.
