@@ -10,6 +10,7 @@ type RouteContext = {
 
 const VALID_TICKER = /^[\w-]{1,64}$/;
 const MARKET_RATE_LIMIT = 120; // requests per minute
+const MARKET_CACHE_CONTROL = "s-maxage=20, stale-while-revalidate=40";
 
 export async function GET(request: Request, context: RouteContext) {
   const ip = getClientIp(request);
