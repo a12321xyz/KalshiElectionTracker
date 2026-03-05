@@ -7,6 +7,7 @@ import { isIP } from "node:net";
 
 const windowMs = 60_000; // 1 minute window
 const maxBuckets = 10_000;
+const CLEANUP_INTERVAL_MS = 5 * 60_000;
 
 interface Entry {
     timestamps: number[];
