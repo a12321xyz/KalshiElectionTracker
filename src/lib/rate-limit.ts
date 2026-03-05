@@ -139,5 +139,5 @@ export function getClientIp(request: Request): string {
         return forwardedIp;
     }
 
-    return "unknown";
+    return UNKNOWN_CLIENT_IP;
 }
