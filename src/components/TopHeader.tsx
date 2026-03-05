@@ -131,7 +131,7 @@ export function TopHeader() {
       {mobileOpen ? (
         <nav id={MOBILE_NAV_ID} className={styles.mobileMenu} aria-label="Mobile navigation">
           {NAV_ITEMS.map((item) => {
-            const isActive = item.href === "/" ? pathname === "/" : pathname.startsWith(item.href);
+            const isActive = isNavItemActive(pathname, item.href);
 
             return (
               <Link
