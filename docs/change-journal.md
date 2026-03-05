@@ -64,3 +64,6 @@ This file tracks small, low-risk maintenance updates so behavior-focused work ca
 
 ## Forwarded chain parsing
 - Explained right side preference when parsing forwarded IP chains.
+
+## Fallback IP behavior
+- Documented unknown fallback behavior when no valid header is present.
