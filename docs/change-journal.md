@@ -100,3 +100,6 @@ This file tracks small, low-risk maintenance updates so behavior-focused work ca
 
 ## Movers cap behavior
 - Added notes on the twelve item cap used in mover selection.
+
+## Volume aggregation
+- Documented how total volume is aggregated across merged markets.
