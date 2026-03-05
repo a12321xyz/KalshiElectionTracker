@@ -35,6 +35,10 @@ function getInitialDarkPreference(): boolean {
   }
 }
 
+function isNavItemActive(pathname: string, href: string): boolean {
+  return href === "/" ? pathname === "/" : pathname.startsWith(href);
+}
+
 export function TopHeader() {
   const pathname = usePathname();
   const [dark, setDark] = useState(getInitialDarkPreference);
