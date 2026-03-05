@@ -43,3 +43,6 @@ This file tracks small, low-risk maintenance updates so behavior-focused work ca
 
 ## Event grouping strategy
 - Added notes on grouping markets into event level summaries.
+
+## Top market ranking rule
+- Documented the volume first ranking method for featured markets.
