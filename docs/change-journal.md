@@ -97,3 +97,6 @@ This file tracks small, low-risk maintenance updates so behavior-focused work ca
 
 ## Top markets cap
 - Recorded the top market list size limit in the snapshot model.
+
+## Movers cap behavior
+- Added notes on the twelve item cap used in mover selection.
