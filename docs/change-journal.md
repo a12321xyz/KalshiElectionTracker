@@ -7,3 +7,6 @@ This file tracks small, low-risk maintenance updates so behavior-focused work ca
 
 ## Dashboard cache headers
 - Recorded the current Cache Control profile used by the dashboard endpoint.
+
+## Market cache headers
+- Noted that market detail responses mirror the dashboard cache behavior.
