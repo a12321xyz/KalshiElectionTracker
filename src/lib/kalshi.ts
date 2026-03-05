@@ -111,7 +111,7 @@ export function toProbability(market: RawMarket): number {
     return toPercent(yesAsk);
   }
 
-  return 50;
+  return DEFAULT_IMPLIED_PROBABILITY;
 }
 
 export function toMovePoints(market: RawMarket, impliedProbability: number): number {
