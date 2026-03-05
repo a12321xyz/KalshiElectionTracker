@@ -127,3 +127,6 @@ This file tracks small, low-risk maintenance updates so behavior-focused work ca
 
 ## Path normalization
 - Documented forced leading slash normalization for API paths.
+
+## Cold start snapshot flow
+- Captured the behavior when snapshot cache is empty at startup.
