@@ -5,6 +5,7 @@ import { checkRateLimit, getClientIp } from "@/lib/rate-limit";
 export const runtime = "nodejs";
 
 const DASHBOARD_RATE_LIMIT = 60; // requests per minute
+const DASHBOARD_CACHE_CONTROL = "s-maxage=20, stale-while-revalidate=40";
 
 export async function GET(request: Request) {
   const ip = getClientIp(request);
