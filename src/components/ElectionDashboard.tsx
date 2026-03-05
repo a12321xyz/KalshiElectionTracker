@@ -403,7 +403,7 @@ export function ElectionDashboard() {
       setDetailLoading(true);
       setDetailError(null);
       try {
-        const response = await fetch(`/api/market/${encodeURIComponent(selectedTicker)}`, { cache: "no-store" });
+        const response = await fetch(`${MARKET_ENDPOINT_PREFIX}${encodeURIComponent(selectedTicker)}`, { cache: "no-store" });
         if (!response.ok) throw new Error(`Market detail request failed (${response.status}).`);
         const nextDetail = (await response.json()) as MarketDetail;
         if (!ignore) setDetail(nextDetail);
