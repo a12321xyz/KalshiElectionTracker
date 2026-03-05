@@ -12,6 +12,7 @@ const NAV_ITEMS: ReadonlyArray<{ href: string; label: string }> = [
 ];
 
 const MOBILE_NAV_ID = "primary-mobile-nav";
+const THEME_STORAGE_KEY = "theme";
 
 function getInitialDarkPreference(): boolean {
   if (typeof window === "undefined") {
