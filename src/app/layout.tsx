@@ -17,6 +17,8 @@ const ibmPlexMono = IBM_Plex_Mono({
   display: "swap",
 });
 
+const SITE_NAME = "Kalshi Election Tracker";
+
 export const metadata: Metadata = {
   title: "Kalshi Election Tracker",
   description: "Track live Kalshi election markets with implied odds, momentum shifts, and volume leaders.",
