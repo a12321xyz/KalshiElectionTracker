@@ -82,3 +82,6 @@ This file tracks small, low-risk maintenance updates so behavior-focused work ca
 
 ## Dashboard request ceiling
 - Documented the current per minute request cap for dashboard calls.
+
+## Market request ceiling
+- Documented the per minute request cap for market detail calls.
