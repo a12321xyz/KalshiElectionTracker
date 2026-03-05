@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     title: SITE_NAME,
     description: "Live election market tracker — implied odds, momentum shifts & volume leaders from Kalshi.",
     type: "website",
-    siteName: "Kalshi Election Tracker",
+    siteName: SITE_NAME,
   },
   twitter: {
     card: "summary_large_image",
