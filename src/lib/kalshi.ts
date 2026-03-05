@@ -339,7 +339,7 @@ function buildEventSummaries(markets: DashboardMarket[]): DashboardEvent[] {
         .slice(0, 3),
     }))
     .sort((left, right) => right.totalVolume24h - left.totalVolume24h)
-    .slice(0, 10);
+    .slice(0, TOP_EVENTS_LIMIT);
 }
 
 async function buildDashboardSnapshotFresh(): Promise<DashboardSnapshot> {
