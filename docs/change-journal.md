@@ -148,3 +148,6 @@ This file tracks small, low-risk maintenance updates so behavior-focused work ca
 
 ## API error message wording
 - Added rationale for concise user facing API error messages.
+
+## Maintenance follow up checklist
+- Added a short checklist to keep future minor edits consistent.
