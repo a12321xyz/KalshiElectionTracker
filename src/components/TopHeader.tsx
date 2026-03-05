@@ -20,7 +20,7 @@ function getInitialDarkPreference(): boolean {
   }
 
   try {
-    const stored = localStorage.getItem("theme");
+    const stored = localStorage.getItem(THEME_STORAGE_KEY);
     if (stored === "dark") {
       return true;
     }
