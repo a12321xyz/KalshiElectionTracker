@@ -61,3 +61,6 @@ This file tracks small, low-risk maintenance updates so behavior-focused work ca
 
 ## Client IP extraction order
 - Noted the header precedence used to resolve request IP addresses.
+
+## Forwarded chain parsing
+- Explained right side preference when parsing forwarded IP chains.
