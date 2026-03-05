@@ -94,3 +94,6 @@ This file tracks small, low-risk maintenance updates so behavior-focused work ca
 
 ## Event summary truncation
 - Documented the current event summary cap used in dashboard payloads.
+
+## Top markets cap
+- Recorded the top market list size limit in the snapshot model.
