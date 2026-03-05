@@ -73,3 +73,6 @@ This file tracks small, low-risk maintenance updates so behavior-focused work ca
 
 ## Cleanup interval
 - Recorded the periodic cleanup cadence for limiter maintenance.
+
+## API runtime selection
+- Documented why both API routes stay on the node runtime.
