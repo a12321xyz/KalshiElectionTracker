@@ -58,3 +58,6 @@ This file tracks small, low-risk maintenance updates so behavior-focused work ca
 
 ## Rate limit bucket pruning
 - Captured stale bucket pruning behavior in the limiter map.
+
+## Client IP extraction order
+- Noted the header precedence used to resolve request IP addresses.
