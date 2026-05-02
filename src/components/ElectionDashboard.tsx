@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useRef, useState, type TouchEvent as ReactTouchEvent } from "react";
+import { createPortal } from "react-dom";
 import type { DashboardMarket, DashboardSnapshot, MarketDetail } from "@/lib/types";
 import styles from "./election-dashboard.module.css";
 
@@ -142,6 +143,54 @@ function matchesFilter(market: DashboardMarket, filter: FilterTag): boolean {
   return text.includes(filter);
 }
 
+function extractCandidateName(marketTitle: string, subtitle: string, rules?: string): string {
+  // Try to find name in subtitles like "2028 U.S. Presidential Election winner? - Donald J. Trump Jr."
+  if (subtitle && subtitle !== marketTitle) {
+    const parts = subtitle.split(" - ");
+    if (parts.length > 1) {
+      return parts[parts.length - 1];
+    }
+  }
+  // Try to parse from rules: "If Donald J. Trump Jr. is the next person inaugurated..."
+  if (rules && rules.startsWith("If ") && rules.includes(" is the next person")) {
+    const match = rules.match(/^If\s+(.*?)\s+is the next person/);
+    if (match && match[1]) {
+      return match[1];
+    }
+  }
+  return "";
+}
+
+function getDisplayTitle(market: DashboardMarket | null | undefined): string {
+  if (!market) return "";
+  
+  const candidateName = extractCandidateName(market.marketTitle, market.eventSubtitle);
+  if (candidateName) {
+    return market.marketTitle; // return generic question as main title
+  }
+  
+  if (market.yesLabel && market.yesLabel !== "Yes" && market.yesLabel !== "No") {
+    return market.marketTitle;
+  }
+  
+  return market.eventTitle || market.marketTitle;
+}
+
+function getDisplaySubtitle(market: DashboardMarket | null | undefined): string {
+  if (!market) return "";
+  
+  // Try to extract name from subtitle (sometimes contains the specific candidate)
+  const candidateName = extractCandidateName(market.marketTitle, market.eventSubtitle);
+  if (candidateName) return candidateName;
+  
+  // Fallback to yesLabel
+  if (market.yesLabel && market.yesLabel !== "Yes" && market.yesLabel !== "No") {
+    return market.yesLabel;
+  }
+  
+  return market.eventTitle;
+}
+
 function sortMarkets(markets: DashboardMarket[], key: SortKey): DashboardMarket[] {
   return [...markets].sort((a, b) => {
     switch (key) {
@@ -234,6 +283,11 @@ export function ElectionDashboard() {
   const listRef = useRef<HTMLElement>(null);
   const drawerRef = useRef<HTMLElement>(null);
   const drawerCloseRef = useRef<HTMLButtonElement>(null);
+
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     return () => {
@@ -654,11 +708,12 @@ export function ElectionDashboard() {
 
                   <div className={styles.marketHeader}>
                     <span className={styles.rank}>{String(safePage * PAGE_SIZE + index + 1).padStart(2, "0")}</span>
-                    <p className={styles.marketTitle}>{market.marketTitle}</p>
+                    <div className={styles.marketTitleGroup}>
+                      <p className={styles.marketTitle}>{getDisplayTitle(market)}</p>
+                      <p className={styles.marketEvent}>{getDisplaySubtitle(market)}</p>
+                    </div>
                     <span className={`${styles.movePill} ${moveToneClass(market.movePoints)}`}>{formatSigned(market.movePoints)}</span>
                   </div>
-
-                  <p className={styles.marketEvent}>{market.eventTitle}</p>
 
                   {/* Sparkline */}
                   <div className={styles.sparklineRow}>
@@ -739,7 +794,7 @@ export function ElectionDashboard() {
                   <button className={styles.moverItem} type="button" onClick={() => setSelectedTicker(market.ticker)}>
                     <div>
                       <p className={styles.moverTicker}>{market.ticker}</p>
-                      <p className={styles.moverTitle}>{market.marketTitle}</p>
+                      <p className={styles.moverTitle}>{getDisplayTitle(market)}</p>
                     </div>
                     <div className={styles.moverNumbers}>
                       <span className={`${styles.moverMove} ${moveToneClass(market.movePoints)}`}>{formatSigned(market.movePoints)}</span>
@@ -789,119 +844,128 @@ export function ElectionDashboard() {
 
       {/* ── Drawer ──────────────────────── */}
 
-      {selectedTicker ? (
-        <button type="button" className={styles.overlay} onClick={() => setSelectedTicker(null)} aria-label="Close market detail" />
-      ) : null}
+      {mounted ? createPortal(
+        <>
+          {selectedTicker ? (
+            <button type="button" className={styles.overlay} onClick={() => setSelectedTicker(null)} aria-label="Close market detail" />
+          ) : null}
 
-      <aside
-        ref={drawerRef}
-        className={`${styles.drawer} ${selectedTicker ? styles.drawerOpen : ""}`}
-        role="dialog"
-        aria-modal={selectedTicker ? "true" : undefined}
-        aria-labelledby="market-detail-title"
-        aria-hidden={!selectedTicker}
-        tabIndex={-1}
-        onTouchStart={handleSwipeStart}
-        onTouchMove={handleSwipeMove}
-        onTouchEnd={handleSwipeEnd}
-      >
-        <div className={styles.drawerSwipeHandle} aria-hidden="true" />
-        <div className={styles.drawerHeader}>
-          <div>
-            <p className={styles.drawerKicker}>{highlightedMarket?.eventTitle ?? detail?.eventTicker ?? "Election market"}</p>
-            <h3 id="market-detail-title" className={styles.drawerTitle}>
-              {highlightedMarket?.marketTitle ?? detail?.title ?? selectedTicker ?? "Market detail"}
-            </h3>
-          </div>
-          <button ref={drawerCloseRef} className={styles.drawerClose} type="button" onClick={() => setSelectedTicker(null)}>
-            ✕ Close
-          </button>
-        </div>
-
-        {detailLoading ? <p className={styles.detailStatus}>Loading market detail...</p> : null}
-        {detailError ? <p className={styles.detailError}>{detailError}</p> : null}
-
-        {detail && !detailLoading ? (
-          <div className={styles.detailBody}>
-            <div className={styles.detailProbabilityWrap}>
-              <p className={styles.detailProbabilityLabel}>Implied probability</p>
-              <p className={styles.detailProbabilityValue}>{formatPercent(detail.impliedProbability)}</p>
-              <div
-                className={styles.probabilityTrack}
-                role="meter"
-                aria-label="Implied probability"
-                aria-valuenow={detail.impliedProbability}
-                aria-valuemin={0}
-                aria-valuemax={100}
-              >
-                <span
-                  className={styles.probabilityFill}
-                  style={{
-                    width: `${detail.impliedProbability}%`,
-                    background: probabilityBarColor(detail.impliedProbability),
-                  }}
-                />
+          <aside
+            ref={drawerRef}
+            className={`${styles.drawer} ${selectedTicker ? styles.drawerOpen : ""}`}
+            role="dialog"
+            aria-modal={selectedTicker ? "true" : undefined}
+            aria-labelledby="market-detail-title"
+            aria-hidden={!selectedTicker}
+            tabIndex={-1}
+            onTouchStart={handleSwipeStart}
+            onTouchMove={handleSwipeMove}
+            onTouchEnd={handleSwipeEnd}
+          >
+            <div className={styles.drawerSwipeHandle} aria-hidden="true" />
+            <div className={styles.drawerHeader}>
+              <div>
+                <h3 id="market-detail-title" className={styles.drawerTitle}>
+                  {highlightedMarket ? getDisplayTitle(highlightedMarket) : (detail?.title ?? selectedTicker ?? "Market detail")}
+                </h3>
+                <p className={styles.drawerKicker} style={{ marginTop: '0.2rem', color: 'var(--ink-500)', fontWeight: 600 }}>
+                  {detail && detail.rulesPrimary 
+                    ? (extractCandidateName(detail.title, "", detail.rulesPrimary) || getDisplaySubtitle(highlightedMarket) || detail.eventTicker)
+                    : (highlightedMarket ? getDisplaySubtitle(highlightedMarket) : (detail?.eventTicker ?? "Election market"))}
+                </p>
               </div>
+              <button ref={drawerCloseRef} className={styles.drawerClose} type="button" onClick={() => setSelectedTicker(null)}>
+                ✕ Close
+              </button>
             </div>
 
-            <div className={styles.detailGrid}>
-              <article className={styles.quoteCard}>
-                <p className={styles.quoteLabel}>YES Bid / Ask</p>
-                <p className={styles.quoteValue}>
-                  {formatPrice(detail.yesBid)} / {formatPrice(detail.yesAsk)}
-                </p>
-              </article>
-              <article className={styles.quoteCard}>
-                <p className={styles.quoteLabel}>NO Bid / Ask</p>
-                <p className={styles.quoteValue}>
-                  {formatPrice(detail.noBid)} / {formatPrice(detail.noAsk)}
-                </p>
-              </article>
-              <article className={styles.quoteCard}>
-                <p className={styles.quoteLabel}>Move Today</p>
-                <p className={`${styles.quoteValue} ${moveToneClass(detail.movePoints)}`}>{formatSigned(detail.movePoints)}</p>
-              </article>
-              <article className={styles.quoteCard}>
-                <p className={styles.quoteLabel}>24h Volume</p>
-                <p className={styles.quoteValue}>{formatCount(detail.volume24h)}</p>
-              </article>
-            </div>
+            {detailLoading ? <p className={styles.detailStatus}>Loading market detail...</p> : null}
+            {detailError ? <p className={styles.detailError}>{detailError}</p> : null}
 
-            <dl className={styles.definitionList}>
-              <div>
-                <dt>Ticker</dt>
-                <dd>{detail.ticker}</dd>
-              </div>
-              <div>
-                <dt>Status</dt>
-                <dd>{detail.status}</dd>
-              </div>
-              <div>
-                <dt>Open interest</dt>
-                <dd>{formatCount(detail.openInterest)}</dd>
-              </div>
-              <div>
-                <dt>Close time</dt>
-                <dd>{formatCloseTime(detail.closeTime)}</dd>
-              </div>
-              <div>
-                <dt>Last trade</dt>
-                <dd>{formatPrice(detail.lastPrice)}</dd>
-              </div>
-              <div>
-                <dt>Previous close</dt>
-                <dd>{formatPrice(detail.previousPrice)}</dd>
-              </div>
-            </dl>
+            {detail && !detailLoading ? (
+              <div className={styles.detailBody}>
+                <div className={styles.detailProbabilityWrap}>
+                  <p className={styles.detailProbabilityLabel}>Implied probability</p>
+                  <p className={styles.detailProbabilityValue}>{formatPercent(detail.impliedProbability)}</p>
+                  <div
+                    className={styles.probabilityTrack}
+                    role="meter"
+                    aria-label="Implied probability"
+                    aria-valuenow={detail.impliedProbability}
+                    aria-valuemin={0}
+                    aria-valuemax={100}
+                  >
+                    <span
+                      className={styles.probabilityFill}
+                      style={{
+                        width: `${detail.impliedProbability}%`,
+                        background: probabilityBarColor(detail.impliedProbability),
+                      }}
+                    />
+                  </div>
+                </div>
 
-            <section className={styles.rulesSection}>
-              <h4>Market Rules</h4>
-              <p>{detail.rulesPrimary || "Rules not available in current payload."}</p>
-              {detail.rulesSecondary ? <p>{detail.rulesSecondary}</p> : null}
-            </section>
-          </div>
-        ) : null}
-      </aside>
+                <div className={styles.detailGrid}>
+                  <article className={styles.quoteCard}>
+                    <p className={styles.quoteLabel}>YES Bid / Ask</p>
+                    <p className={styles.quoteValue}>
+                      {formatPrice(detail.yesBid)} / {formatPrice(detail.yesAsk)}
+                    </p>
+                  </article>
+                  <article className={styles.quoteCard}>
+                    <p className={styles.quoteLabel}>NO Bid / Ask</p>
+                    <p className={styles.quoteValue}>
+                      {formatPrice(detail.noBid)} / {formatPrice(detail.noAsk)}
+                    </p>
+                  </article>
+                  <article className={styles.quoteCard}>
+                    <p className={styles.quoteLabel}>Move Today</p>
+                    <div className={styles.quoteValue}>
+                      <span className={`${styles.movePill} ${moveToneClass(detail.movePoints)}`}>{formatSigned(detail.movePoints)}</span>
+                    </div>
+                  </article>
+                  <article className={styles.quoteCard}>
+                    <p className={styles.quoteLabel}>24h Volume</p>
+                    <p className={styles.quoteValue}>{formatCount(detail.volume24h)}</p>
+                  </article>
+                </div>
+
+                <dl className={styles.definitionList}>
+                  <div>
+                    <dt>Ticker</dt>
+                    <dd>{detail.ticker}</dd>
+                  </div>
+                  <div>
+                    <dt>Status</dt>
+                    <dd>{detail.status}</dd>
+                  </div>
+                  <div>
+                    <dt>Open interest</dt>
+                    <dd>{formatCount(detail.openInterest)}</dd>
+                  </div>
+                  <div>
+                    <dt>Close time</dt>
+                    <dd>{formatCloseTime(detail.closeTime)}</dd>
+                  </div>
+                  <div>
+                    <dt>Last trade</dt>
+                    <dd>{formatPrice(detail.lastPrice)}</dd>
+                  </div>
+                  <div>
+                    <dt>Previous close</dt>
+                    <dd>{formatPrice(detail.previousPrice)}</dd>
+                  </div>
+                </dl>
+
+                <section className={styles.rulesSection}>
+                  <h4>Market Rules</h4>
+                  <p>{detail.rulesPrimary || "Rules not available in current payload."}</p>
+                  {detail.rulesSecondary ? <p>{detail.rulesSecondary}</p> : null}
+                </section>
+              </div>
+            ) : null}
+          </aside>
+        </>, document.body) : null}
 
       {/* ── Toasts ──────────────────────── */}
 

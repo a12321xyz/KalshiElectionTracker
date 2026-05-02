@@ -523,8 +523,14 @@
 .marketHeader {
   display: grid;
   grid-template-columns: auto 1fr auto;
-  align-items: center;
+  align-items: flex-start;
   gap: 0.65rem;
+}
+
+.marketTitleGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
 }
 
 .rank {
@@ -538,7 +544,7 @@
   color: var(--ink-900);
   font-size: 0.9rem;
   line-height: 1.35;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .movePill {
@@ -565,9 +571,9 @@
 }
 
 .marketEvent {
-  margin-top: 0.4rem;
-  color: var(--ink-500);
-  font-size: 0.81rem;
+  color: var(--ink-700);
+  font-size: 0.95rem;
+  font-weight: 600;
 }
 
 /* ── Sparkline ────────────────────────── */
@@ -782,7 +788,7 @@
   backdrop-filter: blur(4px);
   border: 0;
   cursor: pointer;
-  z-index: 18;
+  z-index: 35;
   animation: fadeIn 200ms ease;
 }
 
@@ -797,7 +803,7 @@
   background: var(--drawer-bg);
   border-left: 1px solid var(--line-200);
   box-shadow: -20px 0 40px rgba(0, 0, 0, 0.2);
-  z-index: 20;
+  z-index: 40;
   display: grid;
   grid-template-rows: auto 1fr;
 }
